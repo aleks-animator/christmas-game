@@ -1,0 +1,181 @@
+@font-face {
+  font-family: "atari";
+  src: url(./fonts/koprac.otf);
+}
+@font-face {
+  font-family: "atari2";
+  src: url(./fonts/atari1.ttf);
+}
+@font-face {
+  font-family: "bubbles";
+  src: url(./fonts/RubikBubbles-Regular.ttf);
+}
+* {
+  font-family: "bubbles";
+}
+body {
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+  background-size: 100% 100%;
+  cursor: pointer;
+  font-weight: bolder;
+  font-size: 1.5rem;
+}
+header {
+  margin-bottom: 0;
+  height: 4%;
+  background: url(./images/header-bg.png) no-repeat;
+  background-size: 100% 120%;
+  color: #2196f3;
+  letter-spacing: 5px;
+}
+main {
+  margin: 0;
+  height: 96%;
+}
+
+.start-page .modals {
+  width: 45%;
+  height: 35%;
+  color: #03a9f4;
+  font-weight: 200;
+}
+.start-page {
+  cursor: default;
+}
+.modals span {
+  font-size: 2.2rem;
+  margin-right: 0.3rem;
+}
+.modals span.set-speed {
+  font-size: 1.5rem;
+  color: #2196f3;
+}
+
+.start-btn,
+.restart-btn,
+.practice-btn,
+.new-ball-btn,
+.score-btn {
+  border: 2px solid #ff9800;
+  border-radius: 0.5rem;
+  color: #ff9800;
+  padding: 0.5rem;
+}
+.set-speed ,.speed-input{
+  color: #9c27b0;
+}
+
+.new-ball {
+  width: 30%;
+  height: 30%;
+  background-color: #fff;
+  color: #1010ad;
+  font-weight: 200;
+  border: 4px solid #0877cc;
+  border-radius: 1rem;
+}
+
+.new-ball-btn {
+  color: rgb(0, 55, 218);
+  border: 3px solid #0d78ca;
+}
+
+.modals p {
+  color: #3c3b3b;
+  font-size: 0.9rem;
+  font-weight: 100;
+}
+.modals img {
+  position: absolute;
+  top: 20%;
+  width: 10%;
+  animation: move-balls 0.5s alternate linear infinite;
+}
+.cards {
+  transform-origin: bottom left;
+}
+.cards span {
+  position: absolute;
+  transform: rotate(-20deg);
+  animation: swing 3s linear alternate infinite;
+}
+
+.leaderboard {
+  position: fixed;
+  background: orange;
+  top: 5%;
+  left: 5%;
+  right: 5%;
+  bottom: 5%;
+  z-index: 9999;
+  padding: 50px 20px;
+}
+
+.leaderboard-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  width: auto;
+}
+@keyframes swing {
+  70% {
+    transform: translateX(calc(35px * var(--p))) rotate(20deg);
+  }
+  30% {
+    transform: translateX(calc(35px * var(--p))) rotate(20deg);
+  }
+}
+.modals img:first-of-type {
+  left: 1%;
+}
+.modals img:last-of-type {
+  right: 1%;
+}
+
+@keyframes move-balls {
+  to {
+    transform: translateY(40%);
+  }
+}
+@media screen and (orientation: portrait) {
+  body {
+    height: 100svh;
+  }
+  header {
+    font-size: 1rem;
+  }
+  .start-page .modals,
+  .end-page .modals {
+    width: 90% !important;
+  }
+  .modals span {
+    font-size: 1.2rem;
+  }
+  .modals p {
+    font-size: 50%;
+  }
+  .modals img {
+    top: 17%;
+  }
+  .start-btn,
+  .restart-btn,
+  .new-ball-btn {
+    font-size: 1rem;
+  }
+  .new-ball {
+    width: 90%;
+    height: 40%;
+    font-size: 1rem;
+  }
+  @keyframes swing {
+    70% {
+      transform: translateX(calc(26px * var(--p))) rotate(20deg);
+    }
+    30% {
+      transform: translateX(calc(26px * var(--p))) rotate(20deg);
+    }
+  }
+}
