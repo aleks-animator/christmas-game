@@ -29,13 +29,14 @@ const playerNameInput = document.getElementById("player-name");
 
 // Game values
 let isGameStarted = false;
-let speed = 3;
+let speed = 1;
 let ball = null;
 let bG1 = null;
 let bG2 = null;
 let bgSpeed = null;
 let ballSpeed = null;
-let previousBall = 1;
+let previousBall = 0;
+let randomBallIndex = null;
 let score = 0;
 let isPracticeMode = false;
 let groundIndex = 0;
@@ -58,7 +59,7 @@ const ballsArray = [
     "olive-surf",
 ];
 const ballTouchPoint = canvasHeight * 0.63;
-const ballStartPosition = canvasHeight * 0.25;
+const ballStartPosition = canvasHeight * 0.22;
 
 // Game classes
 class Background {
@@ -72,8 +73,8 @@ class Background {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.speed = this.speed;
-        this.id = "lila";
+        this.speed = speed;
+        this.id = "blue";
     }
 
     draw() {
@@ -100,8 +101,8 @@ class Ball {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.speed = this.speed;
-        this.id = "lila";
+        this.speed = speed;
+        this.id = "blue";
     }
 
     draw() {
@@ -109,16 +110,15 @@ class Ball {
     }
 
     update() {
-        if (this.y >= ballTouchPoint) {
-
-        }
         if (this.y >= ballTouchPoint || this.y <= ballStartPosition) {
             this.speed = -this.speed;
         }
         if (this.y <= ballStartPosition) {
-            let newId = ballsArray[createRandomBall()].slice(0, -5);
+            randomBallIndex = createRandomIndex(randomBallIndex, ballsArray)
+            let newId = ballsArray[randomBallIndex].slice(0, -5);
             this.ball.src = "./images/" + newId + "-surf.png";
             this.id = newId;
+            previousBall = randomBallIndex
         }
         this.y += this.speed;
     }
@@ -232,7 +232,6 @@ leaderboardCloseBtn.onclick = () => {
 // Show leaderboard
 function showLeaderboard() {
     leaderboardDiv.classList.remove("d-none");
-
     const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
     displayLeaderboard(leaderboard);
 }
@@ -248,29 +247,28 @@ function displayLeaderboard(leaderboard) {
 }
 
 // Create random ball color
-function createRandomBall() {
-    let randomBall;
+function createRandomIndex(item, arr) {
     do {
-        randomBall = Math.floor(Math.random() * ballsArray.length);
-    } while (randomBall === previousBall);
-    previousBall = randomBall;
-    return randomBall;
+        item = Math.floor(Math.random() * arr.length);
+    } while (item === previousBall);
+    return item;
 }
 
 // Change ground color functions
 function changeBgColor() {
-    if (groundIndex === bGImagesArray.length) {
-        groundIndex = 0;
-    }
-    let newBg = bGImagesArray[groundIndex];
 
+    if (groundIndex === bGImagesArray.length - 1) {
+        groundIndex = 0;
+    } else {
+        groundIndex++
+    }
+    const newBg = bGImagesArray[groundIndex];
     bgArray.forEach((item) => {
         item.bg.src = "";
         item.bg.src = newBg;
         item.id = newBg.slice(9, -7);
         item.draw();
     });
-    groundIndex++;
 }
 
 const resetInactivityTimer = () => {
