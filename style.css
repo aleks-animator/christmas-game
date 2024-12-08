@@ -1,16 +1,16 @@
 @font-face {
     font-family: "atari";
-    src: url(./fonts/koprac.otf);
+    src: url(./fonts/PineappleDemo-3oGz.ttf);
 }
 
 @font-face {
     font-family: "atari2";
-    src: url(./fonts/atari1.ttf);
+    src: url(./fonts/PineappleDemo-3oGz.ttf);
 }
 
 @font-face {
     font-family: "bubbles";
-    src: url(./fonts/RubikBubbles-Regular.ttf);
+    src: url(./fonts/PineappleDemo-3oGz.ttf);
 }
 
 * {
@@ -43,10 +43,11 @@ main {
     width: 50%;
     height: 50%;
     padding: 5%;
-    background-color: antiquewhite;
+    background-color: #feb638;
     color: #2196f3;
     border-radius: 1rem;
     font-weight: 200;
+    border-radius: 20px;
 }
 
 .start-page {
@@ -68,11 +69,13 @@ main {
 .practice-btn,
 .new-ball-btn,
 .score-btn,
-.new-ball-btn {
+.new-ball-btn,
+.enter-name {
     border: 2px solid #ff9800;
     border-radius: 0.5rem;
-    color: #ff9800;
+    color: #903232;
     padding: 0.5rem;
+    background-color: #f1ea7c;
 }
 
 .new-ball {
@@ -86,18 +89,35 @@ main {
     font-size: 0.9rem;
     font-weight: 100;
 }
+.text-center {
+    color: #903232;
 
+}
+
+.logo {
+    width: 200px;
+}
 .leaderboard {
     position: fixed;
-    background: orange;
+    background: #feb638 url("images/leaderboard-bg.png") no-repeat left center ;
+    background-size: 47%;
     top: 5%;
     left: 5%;
     right: 5%;
     bottom: 5%;
     z-index: 9999;
     padding: 50px 20px;
+    border-radius: 20px;
+    color:#903232;
+}
+.leaderboard-scores {
 }
 
+.leaderboard-scores-inner {
+    max-width: 80%;
+    text-align: center;
+    margin: 100px auto 0 auto;
+}
 .leaderboard-close {
     position: absolute;
     top: 20px;

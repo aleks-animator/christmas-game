@@ -237,6 +237,7 @@ function showLeaderboard() {
 }
 
 function displayLeaderboard(leaderboard) {
+    const leaderboardScoresDiv = document.querySelector(".leaderboard-scores-inner");
     leaderboardScoresDiv.innerHTML = "";
 
     leaderboard.forEach((playerData, index) => {
