@@ -46,22 +46,19 @@
       <canvas id="canvas"></canvas>
     </main>
     <div
-      class="start-page position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
+      class="start-page position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center  flex-column align-items-center"
     >
+      <img class="logo" src="images/logo.png" alt="">
       <div
         class="modals position-relative d-flex flex-column justify-content-center align-items-center gap-3 text-center"
       >
         <div class="position-absolute top-0 start-0 translate-middle">
         </div>
-        <button class="start-btn">Start game</button>
         <button class="practice-btn">Practice Mode</button>
-
-        <input type="text" id="player-name" placeholder="Your Name" />
+        <button class="start-btn">Competitive game</button>
+        <input class="enter-name" type="text" id="player-name" placeholder="Your Name" />
         <button class="score-btn">View leaderboard</button>
 
-        <h5 class="text-center">
-          click mouse or space on keyboard to match ground color with ball color
-        </h5>
         <img src="./images/orange-ball.png" alt="" />
         <img src="./images/red-ball.png" alt="" />
       </div>
@@ -90,9 +87,20 @@
     <div class="leaderboard row d-none">
 
       <div class="leaderboard-scores col-6">
+        <div class="leaderboard-scores-inner">
+
+        </div>
       </div>
       <div class="leaderboard-rules col-6">
-        <p>Lorem  ipsum dummy text this is game rule Lorem  ipsum dummy text this is game rule Lorem  ipsum dummy text this is game rule Lorem  ipsum dummy text this is game rule Lorem  ipsum dummy text this is game rule .</p>
+        <h1>Teste deine Reflexe in AHA! Surfspiel</h1>
+
+        <h3>Gameplay:</h3>
+
+        <p>Wenn der Surfer die Höhe erreicht, wechselt seine Farbe. Du musst die Farbe des Bodens mit der Farbe des Surfers anpassen, bevor er den Boden berührt.</p>
+
+        <p>Achtung, je weiter du kommst, desto schneller wird das Spiel!</p>
+
+        <p>Du kannst üben, aber du darfst nur einmal wettbewerbsfähig spielen!</p>
       </div>
 
       <div class="leaderboard-close">
