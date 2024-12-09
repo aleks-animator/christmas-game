@@ -87,7 +87,7 @@ h2.game-over {
     color: #d63066;
     padding: 0.5rem;
     background-color: #fde095;
-    transition: transform 0.4s ease;
+    transition: all 0.4s ease;
     transform-origin: center;
 }
 
@@ -97,6 +97,16 @@ h2.game-over {
 .new-ball-btn:hover,
 .score-btn:hover {
     transform: rotate(-2deg);
+    border-color: #d63066;
+    background: #fde3a0;
+}
+
+.enter-name:hover,
+.enter-name:focus
+{
+    border-color: #d63066;
+    background: #fde3a0;
+    outline: none;
 }
 
 .enter-name::placeholder {
