@@ -27,7 +27,7 @@
     />
     <!-- Css link -->
     <link rel="stylesheet" href="style.css" />
-    <title>bouncy-ball</title>
+    <title>Surfspiel!</title>
   </head>
   <body>
     <header>
@@ -58,16 +58,18 @@
         <button class="start-btn">Competitive Mode</button>
         <input class="enter-name" type="text" id="player-name" placeholder="Your Name" />
         <button class="score-btn">View leaderboard</button>
-        <div class="alarm text-center d-none">Please type your name first!</div>
+        <div class="alarm text-center invisible">Please type your name first!</div>
       </div>
     </div>
     <div
       class="end-page position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center d-none"
     >
       <div
-        class="modals position-relative d-flex flex-column justify-content-center align-items-center gap-3 w-25 text-center"
+        class="modals play-again position-relative d-flex flex-column justify-content-center align-items-center gap-3 text-center"
       >
+        <h2 class="game-over">Game Over</h2>
         <button class="restart-btn">Play again</button>
+
       </div>
     </div>
     <div
@@ -90,7 +92,7 @@
         </div>
       </div>
       <div class="leaderboard-rules col-6">
-        <h1>Teste deine Reflexe in AHA! Surfspiel</h1>
+        <h1>Teste deine Reflexe in Surfspiel!</h1>
 
         <h3>Gameplay:</h3>
 

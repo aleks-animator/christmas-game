@@ -39,19 +39,31 @@ main {
     height: 96%;
 }
 
-.start-page .modals {
+.start-page .modals,
+.play-again {
     width: 50%;
     height: 50%;
     padding: 5%;
     background-color: #fac42c;
     color: #2196f3;
-    border-radius: 1rem;
     font-weight: 200;
     border-radius: 20px;
+    border: 4px solid #ff9800;
+}
+
+
+
+.play-again {
+    width: 30%;
+    height: 30%;
 }
 
 .start-page {
     cursor: default;
+}
+
+h2.game-over {
+    font-size: 50px;
 }
 
 .modals span {
@@ -71,11 +83,15 @@ main {
 .score-btn,
 .new-ball-btn,
 .enter-name {
-    border: 2px solid #ff9800;
+    border: 4px solid #ff9800;
     border-radius: 0.5rem;
     color: #d63066;
     padding: 0.5rem;
     background-color: #fde095;
+}
+
+.enter-name::placeholder {
+    color: #B19C68;
 }
 
 .practice-btn {
@@ -105,33 +121,48 @@ main {
 }
 .leaderboard {
     position: fixed;
-    background: #fac42c url("images/leaderboard-bg.png") no-repeat left center ;
-    background-size: 47%;
     top: 5%;
     left: 5%;
     right: 5%;
     bottom: 5%;
     z-index: 9999;
-    padding: 50px 20px;
     border-radius: 20px;
     color:#0f7a59;
+    border: 4px solid #ff9800;
+    background-color: #fac42c;
+    overflow: hidden;
 }
+
 .leaderboard-scores {
+    background: url("images/leaderboard-bg.png") no-repeat left ;
+    background-size: 100% 100%;
 }
 
 .leaderboard-scores-inner {
     max-width: 80%;
     text-align: center;
-    margin: 100px auto 0 auto;
+    margin: 200px auto 0 auto;
 }
+
+.leaderboard-rules {
+    padding: 5%;
+    background: #f98200;
+    color: white;
+    box-shadow: -18px 7px 24px -9px rgba(0,0,0,0.33);
+}
+
 .leaderboard-close {
     position: absolute;
     top: 20px;
     right: 20px;
-    font-size: 30px;
+    font-size: 40px;
     width: auto;
+    color: white;
 }
 
+.alarm {
+    color: #f98200;
+}
 @media screen and (orientation: portrait) {
     body {
         height: 100svh;
@@ -160,6 +191,9 @@ main {
         width: 90%;
         height: 40%;
         font-size: 1rem;
+        background-color: #fac42c;
+        color: #2196f3;
+        border: 4px solid #ff9800;
     }
 
     @keyframes swing {

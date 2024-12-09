@@ -188,10 +188,10 @@ startBtn.onclick = () => {
     playerName = playerNameInput.value
     if (playerName !== "" && !isPracticeMode) {
         isPracticeMode = false;
-        startPage.classList.add("d-none");
+        startPage.classList.add("visible");
         startGame();
     } else {
-        alarm.classList.remove("d-none")
+        alarm.classList.remove("invisible")
     }
 };
 
