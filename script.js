@@ -26,10 +26,10 @@ const leaderboardDiv = document.querySelector(".leaderboard");
 const leaderboardScoresDiv = document.querySelector(".leaderboard-scores");
 const leaderboardCloseBtn = document.querySelector(".leaderboard-close");
 const playerNameInput = document.getElementById("player-name");
-
+const alarm = document.querySelector(".alarm")
 // Game values
 let isGameStarted = false;
-let speed = 1;
+let speed = 2;
 let ball = null;
 let bG1 = null;
 let bG2 = null;
@@ -44,29 +44,31 @@ let keyboard = true;
 let animateId = null;
 let bgArray = [];
 let inactivityTimer;
+let playerName = false;
 const bGImagesArray = [
-    "./images/blue-bg.jpg",
     "./images/orange-bg.jpg",
+    "./images/blue-bg.jpg",
     "./images/green-bg.jpg",
     "./images/yellow-bg.jpg",
     "./images/olive-bg.jpg",
 ];
 const ballsArray = [
-    "blue-surf",
     "orange-surf",
+    "blue-surf",
     "green-surf",
     "yellow-surf",
     "olive-surf",
 ];
-const ballTouchPoint = canvasHeight * 0.63;
-const ballStartPosition = canvasHeight * 0.22;
+const ballTouchPoint = canvasHeight * 0.57;
+const ballStartPosition = canvasHeight * 0.1;
 
 // Game classes
-class Background {
-    constructor(bgSrc, x, y, width, height) {
-        this.bg = new Image();
-        this.bg.src = bgSrc;
-        this.bg.onload = () => {
+class GameElement {
+    constructor(type, src, x, y, width, height, speed) {
+        this.type = type; // 'ball' or 'background'
+        this.image = new Image();
+        this.image.src = src;
+        this.image.onload = () => {
             this.draw();
         };
         this.x = x;
@@ -74,89 +76,69 @@ class Background {
         this.width = width;
         this.height = height;
         this.speed = speed;
-        this.id = "blue";
+        this.id = "orange"; // Default id
     }
 
     draw() {
-        ctx.drawImage(this.bg, this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 
     update() {
+        if (this.type === "background") {
+            this.x -= this.speed;
+            if (this.x <= -this.width) {
+                this.x = 0;
+            }
+        } else if (this.type === "ball") {
+            if (this.y >= ballTouchPoint || this.y <= ballStartPosition) {
+                this.speed = -this.speed;
+            }
+            if (this.y <= ballStartPosition) {
+                randomBallIndex = createRandomIndex(randomBallIndex, ballsArray);
+                let newId = ballsArray[randomBallIndex].slice(0, -5);
+                this.image.src = "./images/" + newId + "-surf.png";
+                this.id = newId;
+                previousBall = randomBallIndex;
+            }
+            this.y += this.speed;
+        }
+
         this.draw();
-        this.x -= this.speed;
-        if (this.x <= -this.width) {
-            this.x = 0;
-        }
-    }
-}
-
-class Ball {
-    constructor(ballSrc, x, y, width, height) {
-        this.ball = new Image();
-        this.ball.src = ballSrc;
-        this.ball.onload = () => {
-            this.draw();
-        };
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.speed = speed;
-        this.id = "blue";
     }
 
-    draw() {
-        ctx.drawImage(this.ball, this.x, this.y, this.width, this.height);
-    }
-
-    update() {
-        if (this.y >= ballTouchPoint || this.y <= ballStartPosition) {
-            this.speed = -this.speed;
-        }
-        if (this.y <= ballStartPosition) {
-            randomBallIndex = createRandomIndex(randomBallIndex, ballsArray)
-            let newId = ballsArray[randomBallIndex].slice(0, -5);
-            this.ball.src = "./images/" + newId + "-surf.png";
-            this.id = newId;
-            previousBall = randomBallIndex
-        }
-        this.y += this.speed;
+    updateSpeed(newSpeed) {
+        this.speed = newSpeed;
     }
 }
 
 // Canvas elements
-ball = new Ball(
-    "./images/blue-surf.png",
+ball = new GameElement(
+    "ball",
+    "./images/orange-surf.png",
     canvasWidth * 0.3,
     ballStartPosition + 50,
     canvasWidth * 0.1,
     canvasWidth * 0.1
 );
 
-bG1 = new Background(
-    "./images/blue-bg.jpg",
+bG1 = new GameElement(
+    "background",
+    "./images/orange-bg.jpg",
     0,
     0,
     canvasWidth,
     canvasHeight
 );
 bgArray.push(bG1);
-bG2 = new Background(
-    "./images/blue-bg.jpg",
+bG2 = new GameElement(
+    "background",
+    "./images/orange-bg.jpg",
     canvasWidth,
     0,
     canvasWidth,
     canvasHeight
 );
 bgArray.push(bG2);
-
-
-function updateSpeeds() {
-    ball.speed = speed;
-    bG1.speed = speed;
-    bG2.speed = speed;
-}
-
 
 // Game functions
 function startGame() {
@@ -179,11 +161,14 @@ function animate() {
     } else if (ball.y >= ballTouchPoint && ball.id === bG1.id) {
         score += 10;
         scoreDiv.textContent = score;
-        if (score % 30 === 0) {
+        if (score % 50 === 0) {
             cancelAnimationFrame(animateId);
+            keyboard = false;
             newBallPage.classList.remove("d-none");
             speed++;
-            updateSpeeds();
+            ball.speed = speed;
+            bG1.speed = speed;
+            bG2.speed = speed;
         }
     }
     if (bG2.x <= canvas.getBoundingClientRect().left) {
@@ -200,9 +185,14 @@ function animate() {
 
 // Click functions
 startBtn.onclick = () => {
-    isPracticeMode = false;
-    startPage.classList.add("d-none");
-    startGame();
+    playerName = playerNameInput.value
+    if (playerName !== "" && !isPracticeMode) {
+        isPracticeMode = false;
+        startPage.classList.add("d-none");
+        startGame();
+    } else {
+        alarm.classList.remove("d-none")
+    }
 };
 
 // Practice button onclick to start the game in practice mode
@@ -218,14 +208,17 @@ endBtn.onclick = () => {
 
 newBallBtn.onclick = () => {
     newBallPage.classList.add("d-none");
+    keyboard = true;
     animate();
 };
 
 scoreBtn.onclick = () => {
+    keyboard = false;
     showLeaderboard();
 };
 
 leaderboardCloseBtn.onclick = () => {
+    keyboard = true;
     leaderboardDiv.classList.toggle("d-none");
 };
 
@@ -265,8 +258,8 @@ function changeBgColor() {
     }
     const newBg = bGImagesArray[groundIndex];
     bgArray.forEach((item) => {
-        item.bg.src = "";
-        item.bg.src = newBg;
+        item.image.src = "";
+        item.image.src = newBg;
         item.id = newBg.slice(9, -7);
         item.draw();
     });
@@ -305,11 +298,10 @@ function endGame() {
     cancelAnimationFrame(animateId);
     endPage.classList.remove("d-none");
     endSound.play();
-
-    const playerName = playerNameInput.value.trim();
+    playerName = playerNameInput.value.trim();
     const playerScore = score;
 
-    if (!isPracticeMode && playerName && playerScore >= 0) {
+    if (!isPracticeMode && playerName !== "" && playerScore >= 0) {
         const playerData = {name: playerName, score: playerScore};
         let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
         leaderboard.push(playerData);
