@@ -233,7 +233,22 @@ function displayLeaderboard(leaderboard) {
     const leaderboardScoresDiv = document.querySelector(".leaderboard-scores-inner");
     leaderboardScoresDiv.innerHTML = "";
 
-    leaderboard.forEach((playerData, index) => {
+    leaderboard.sort((a, b) => b.score - a.score);
+
+    const topScores = [];
+    const maxEntries = 5;
+    let lastIncludedScore = null;
+
+    for (let i = 0; i < leaderboard.length; i++) {
+        if (topScores.length < maxEntries || leaderboard[i].score === lastIncludedScore) {
+            topScores.push(leaderboard[i]);
+            lastIncludedScore = leaderboard[i].score;
+        } else {
+            break;
+        }
+    }
+
+    topScores.forEach((playerData, index) => {
         const leaderboardItem = document.createElement("div");
         leaderboardItem.textContent = `${index + 1}. ${playerData.name} - ${playerData.score} points`;
         leaderboardScoresDiv.appendChild(leaderboardItem);
