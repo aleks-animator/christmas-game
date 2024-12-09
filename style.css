@@ -81,13 +81,22 @@ h2.game-over {
 .practice-btn,
 .new-ball-btn,
 .score-btn,
-.new-ball-btn,
 .enter-name {
     border: 4px solid #ff9800;
     border-radius: 0.5rem;
     color: #d63066;
     padding: 0.5rem;
     background-color: #fde095;
+    transition: transform 0.4s ease;
+    transform-origin: center;
+}
+
+.start-btn:hover,
+.restart-btn:hover,
+.practice-btn:hover,
+.new-ball-btn:hover,
+.score-btn:hover {
+    transform: rotate(-2deg);
 }
 
 .enter-name::placeholder {

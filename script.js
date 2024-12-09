@@ -248,11 +248,16 @@ function displayLeaderboard(leaderboard) {
         }
     }
 
-    topScores.forEach((playerData, index) => {
-        const leaderboardItem = document.createElement("div");
-        leaderboardItem.textContent = `${index + 1}. ${playerData.name} - ${playerData.score} points`;
-        leaderboardScoresDiv.appendChild(leaderboardItem);
-    });
+
+    let currentRank = 1;
+    leaderboardScoresDiv.innerHTML = topScores
+        .map((playerData, index) => {
+            if (index > 0 && topScores[index].score < topScores[index - 1].score) {
+                currentRank = index + 1;
+            }
+            return `<div>${currentRank}. ${playerData.name} - ${playerData.score} points</div>`;
+        })
+        .join("");
 }
 
 // Create random ball color
