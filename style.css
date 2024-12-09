@@ -43,7 +43,7 @@ main {
     width: 50%;
     height: 50%;
     padding: 5%;
-    background-color: #feb638;
+    background-color: #fac42c;
     color: #2196f3;
     border-radius: 1rem;
     font-weight: 200;
@@ -73,11 +73,14 @@ main {
 .enter-name {
     border: 2px solid #ff9800;
     border-radius: 0.5rem;
-    color: #903232;
+    color: #d63066;
     padding: 0.5rem;
-    background-color: #f1ea7c;
+    background-color: #fde095;
 }
 
+.practice-btn {
+    margin-top: 140px;
+}
 .new-ball {
     background-color: antiquewhite;
     color: #2196f3;
@@ -90,16 +93,19 @@ main {
     font-weight: 100;
 }
 .text-center {
-    color: #903232;
+    color: #0f7a59;
 
 }
 
 .logo {
-    width: 200px;
+    width: 600px;
+    margin-top: -50px;
+    margin-bottom: -150px;
+    z-index: 100;
 }
 .leaderboard {
     position: fixed;
-    background: #feb638 url("images/leaderboard-bg.png") no-repeat left center ;
+    background: #fac42c url("images/leaderboard-bg.png") no-repeat left center ;
     background-size: 47%;
     top: 5%;
     left: 5%;
@@ -108,7 +114,7 @@ main {
     z-index: 9999;
     padding: 50px 20px;
     border-radius: 20px;
-    color:#903232;
+    color:#0f7a59;
 }
 .leaderboard-scores {
 }
