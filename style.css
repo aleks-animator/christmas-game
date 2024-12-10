@@ -169,6 +169,7 @@ h2.game-over {
     background-size: 110% 110%;
     color: #d63066;
     box-shadow: -18px 7px 24px -9px rgba(0,0,0,0.33);
+    text-align: center;
 }
 
 .leaderboard-rules h1 {
@@ -178,6 +179,7 @@ h2.game-over {
 .leaderboard-rules-inner {
     max-width: 82%;
     margin: 80px auto 0 auto;
+    padding-right: 40px;
 }
 
 .leaderboard-close {
