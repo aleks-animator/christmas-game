@@ -29,7 +29,7 @@ const playerNameInput = document.getElementById("player-name");
 const alarm = document.querySelector(".alarm")
 // Game values
 let isGameStarted = false;
-let speed = 2;
+let speed = 1.5;
 let ball = null;
 let bG1 = null;
 let bG2 = null;
