@@ -191,6 +191,14 @@ h2.game-over {
     color: #fac42c;
 }
 
+.hula-dance{
+    width: 10%;
+    position: absolute;
+    left: 25%;
+    bottom: 10%;
+    translate: -50% 0;
+}
+
 .alarm {
     color: #f98200;
 }
